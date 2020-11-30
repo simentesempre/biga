@@ -106,7 +106,7 @@ const Biga = () => {
                 <Element nome="percentualeSale" label="Percentuale sale" value={input.percentualeSale} handle={handleChange} min={0} max={5} step="0.1" />
                 <Element nome="percentualeOlio" label="Percentuale olio" value={input.percentualeOlio} handle={handleChange} min={0} max={10} step="0.1" />
                 <div className="flex my-2 w-6/12">
-                    <label className="w-full mb-1 mt-6 p-2">Con autolisi
+                    <label className="w-full">Con autolisi
                         <input 
                             className="ml-2"
                             type="checkbox" 
@@ -140,7 +140,7 @@ const Biga = () => {
 
 const Element = ({nome, label, value, handle, min, max, step=1}) => {
     return (
-        <div className="flex flex-col my-2 w-6/12">
+        <div className="flex flex-col my-2 w-6/12 pr-2">
             <label className="w-full mb-1">{label}</label> 
             <input 
                 className="w-full p-2 border"
