@@ -9,7 +9,8 @@ const Biga = () => {
         idratazioneAutolisi: 55,
         idratazioneImpasto: 65,
         idratazoneFinale: 70,
-        percentualeSale: 2
+        percentualeSale: 2.0,
+        conAutolisi: true
     })
 
     const [output, setOutput] = useState({
@@ -19,6 +20,7 @@ const Biga = () => {
         acquaTotale: null,
         acquaPerAutolisi: null,
         farinaPerAutolisi: null,
+        farinaImpasto: null,
         acquaImpasto: null,
         acquaFinale: null,
         sale: null
@@ -33,16 +35,20 @@ const Biga = () => {
             idratazioneAutolisi,
             idratazioneImpasto,
             idratazoneFinale,
-            percentualeSale
+            percentualeSale,
+            conAutolisi
         } = input
+
+
         
         let pesoDellaBiga = Math.round( ( totaleFarina / 100 ) * percentualeBiga )
         let farinaNellaBiga = Math.round( pesoDellaBiga / ( ( idratazioneBiga / 100 ) + 1 ) )
         let acquaNellaBiga = Math.round( pesoDellaBiga - farinaNellaBiga )
         let acquaTotale = Math.round( ( totaleFarina / 100 ) * idratazoneFinale )
-        let farinaPerAutolisi = Math.round( totaleFarina - farinaNellaBiga )
-        let acquaPerAutolisi = Math.round( ( ( farinaPerAutolisi / 100 ) * idratazioneAutolisi ) )
-        let acquaImpasto = Math.round( ( ( totaleFarina / 100 ) * idratazioneImpasto ) - acquaNellaBiga - acquaPerAutolisi ) 
+        let farinaPerAutolisi = conAutolisi ? Math.round( totaleFarina - farinaNellaBiga ) : 0
+        let acquaPerAutolisi = conAutolisi ? Math.round( ( ( farinaPerAutolisi / 100 ) * idratazioneAutolisi ) ) : 0
+        let farinaImpasto = conAutolisi ? 0 : totaleFarina - farinaNellaBiga
+        let acquaImpasto = Math.round( ( ( totaleFarina / 100 ) * idratazioneImpasto ) - acquaNellaBiga - acquaPerAutolisi )
         let acquaFinale = Math.round( ( ( totaleFarina / 100 ) * idratazoneFinale ) - acquaNellaBiga - acquaPerAutolisi - acquaImpasto )
         let sale =  Math.round( ( totaleFarina / 100 ) * percentualeSale ) 
 
@@ -53,6 +59,7 @@ const Biga = () => {
             acquaTotale,
             acquaPerAutolisi,
             farinaPerAutolisi,
+            farinaImpasto,
             acquaImpasto,
             acquaFinale,
             sale
@@ -61,31 +68,49 @@ const Biga = () => {
     }, [input])
 
     const handleChange = e => {
-        const { name, value } = e.target
-        setInput({
-            ...input,
-            [name]: parseInt(value)
-        })
+        const { name, value, type, checked } = e.target
+        if(type === 'checkbox') {
+            setInput({
+                ...input,
+                [name]: checked
+            })
+        } else {
+            setInput({
+                ...input,
+                [name]: name === 'percentualeSale' ? parseFloat(value) : parseInt(value)
+            })
+        }
     }
 
     useEffect(()=>{
         calcola()
     }, [input, calcola])
 
-    useEffect(()=>{
+    /* useEffect(()=>{
         console.log({output})
-    }, [output])
+    }, [output]) */
 
     return (
         <>
             <div className="p-2 flex flex-wrap">
-                <Element nome="totaleFarina" label="Totale farina" value={input.totaleFarina} handle={handleChange} />
-                <Element nome="percentualeBiga" label="Percentuale biga" value={input.percentualeBiga} handle={handleChange} />
-                <Element nome="idratazioneBiga" label="Idratazione biga" value={input.idratazioneBiga} handle={handleChange} />
-                <Element nome="idratazioneAutolisi" label="Idratazione autolisi" value={input.idratazioneAutolisi} handle={handleChange} />
-                <Element nome="idratazioneImpasto" label="Idratazione impasto" value={input.idratazioneImpasto} handle={handleChange} />
-                <Element nome="idratazoneFinale" label="Idratazione finale" value={input.idratazoneFinale} handle={handleChange} />
-                <Element nome="percentualeSale" label="Percentuale sale" value={input.percentualeSale} handle={handleChange} />
+                <Element nome="totaleFarina" label="Totale farina" value={input.totaleFarina} handle={handleChange} min={100} max={null} />
+                <Element nome="percentualeBiga" label="Percentuale biga" value={input.percentualeBiga} handle={handleChange} min={0} max={100} />
+                <Element nome="idratazioneBiga" label="Idratazione biga" value={input.idratazioneBiga} handle={handleChange} min={0} max={100} />
+                <Element nome="idratazioneAutolisi" label="Idratazione autolisi" value={input.idratazioneAutolisi} handle={handleChange} min={0} max={100} />
+                <Element nome="idratazioneImpasto" label="Idratazione impasto" value={input.idratazioneImpasto} handle={handleChange} min={0} max={100} />
+                <Element nome="idratazoneFinale" label="Idratazione finale" value={input.idratazoneFinale} handle={handleChange} min={0} max={100} />
+                <Element nome="percentualeSale" label="Percentuale sale" value={input.percentualeSale} handle={handleChange} min={0} max={5} step="0.1" />
+                <div className="flex my-2 w-6/12">
+                    <label className="w-full mb-1 mt-6 p-2">Con autolisi
+                        <input 
+                            className="ml-2"
+                            type="checkbox" 
+                            name="conAutolisi" 
+                            checked={input.conAutolisi} 
+                            onChange={handleChange} 
+                            min="100" />
+                        </label> 
+                </div>
             </div>
             <div className="p-2">
                 <p>Peso della biga: <strong>{ output.pesoDellaBiga } g</strong></p>
@@ -95,8 +120,9 @@ const Biga = () => {
                 <p>Acqua totale: <strong>{ output.acquaTotale } g</strong></p>
                 <p>&nbsp;</p>
                 <p>Acqua per autolisi: <strong>{ output.acquaPerAutolisi } g</strong></p>
-                <p>Farina per autolisi:<strong>{ output.farinaPerAutolisi } g</strong></p>
+                <p>Farina per autolisi: <strong>{ output.farinaPerAutolisi } g</strong></p>
                 <p>&nbsp;</p>
+                <p>Farina impasto: <strong>{ output.farinaImpasto } g</strong></p>
                 <p>Acqua impasto: <strong>{ output.acquaImpasto } g</strong></p>
                 <p>Acqua finale: <strong>{ output.acquaFinale } g</strong></p>
                 <p>&nbsp;</p>
@@ -106,7 +132,7 @@ const Biga = () => {
     )
 }
 
-const Element = ({nome, label, value, handle}) => {
+const Element = ({nome, label, value, handle, min, max, step=1}) => {
     return (
         <div className="flex flex-col my-2 w-6/12">
             <label className="w-full mb-1">{label}</label> 
@@ -116,7 +142,9 @@ const Element = ({nome, label, value, handle}) => {
                 name={nome} 
                 value={value} 
                 onChange={handle} 
-                min="100" />
+                min={min}
+                max={max} 
+                step={step} />
         </div>
     )
 }
