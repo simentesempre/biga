@@ -78,7 +78,7 @@ const Biga = () => {
 
     return (
         <>
-            <div className="p-4 flex flex-wrap">
+            <div className="p-2 flex flex-wrap">
                 <Element nome="totaleFarina" label="Totale farina" value={input.totaleFarina} handle={handleChange} />
                 <Element nome="percentualeBiga" label="Percentuale biga" value={input.percentualeBiga} handle={handleChange} />
                 <Element nome="idratazioneBiga" label="Idratazione biga" value={input.idratazioneBiga} handle={handleChange} />
@@ -87,7 +87,7 @@ const Biga = () => {
                 <Element nome="idratazoneFinale" label="Idratazione finale" value={input.idratazoneFinale} handle={handleChange} />
                 <Element nome="percentualeSale" label="Percentuale sale" value={input.percentualeSale} handle={handleChange} />
             </div>
-            <div>
+            <div className="p-2">
                 <p>Peso della biga: <strong>{ output.pesoDellaBiga } g</strong></p>
                 <p>Acqua nella biga: <strong>{ output.acquaNellaBiga } g</strong></p>
                 <p>Farina nella biga: <strong>{ output.farinaNellaBiga } g</strong></p>
