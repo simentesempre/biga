@@ -77,92 +77,45 @@ const Biga = () => {
     }, [output])
 
     return (
-        <>
+        <div className="p-4 flex flex-wrap">
+            <Element nome="totaleFarina" label="Totale farina" value={input.totaleFarina} handle={handleChange} />
+            <Element nome="percentualeBiga" label="Percentuale biga" value={input.percentualeBiga} handle={handleChange} />
+            <Element nome="idratazioneBiga" label="Idratazione biga" value={input.idratazioneBiga} handle={handleChange} />
+            <Element nome="idratazioneAutolisi" label="Idratazione autolisi" value={input.idratazioneAutolisi} handle={handleChange} />
+            <Element nome="idratazioneImpasto" label="Idratazione impasto" value={input.idratazioneImpasto} handle={handleChange} />
+            <Element nome="idratazoneFinale" label="Idratazione finale" value={input.idratazoneFinale} handle={handleChange} />
+            <Element nome="percentualeSale" label="Percentuale sale" value={input.percentualeSale} handle={handleChange} />
             <div>
-                Totale farina: 
-                <input 
-                    type="number" 
-                    name="totaleFarina" 
-                    value={input.totaleFarina} 
-                    onChange={handleChange} 
-                    min="100" />
+                <p>Peso della biga: <strong>{ output.pesoDellaBiga } g</strong></p>
+                <p>Acqua nella biga: <strong>{ output.acquaNellaBiga } g</strong></p>
+                <p>Farina nella biga: <strong>{ output.farinaNellaBiga } g</strong></p>
+                <p>&nbsp;</p>
+                <p>Acqua totale: <strong>{ output.acquaTotale } g</strong></p>
+                <p>&nbsp;</p>
+                <p>Acqua per autolisi: <strong>{ output.acquaPerAutolisi } g</strong></p>
+                <p>Farina per autolisi:<strong>{ output.farinaPerAutolisi } g</strong></p>
+                <p>&nbsp;</p>
+                <p>Acqua impasto: <strong>{ output.acquaImpasto } g</strong></p>
+                <p>Acqua finale: <strong>{ output.acquaFinale } g</strong></p>
+                <p>&nbsp;</p>
+                <p>Sale: <strong>{ output.sale } g</strong></p>
             </div>
-            <div>
-                Percentuale biga: 
-                <input 
-                    type="number" 
-                    name="percentualeBiga" 
-                    value={input.percentualeBiga} 
-                    onChange={handleChange} 
-                    min="0"
-                    max="100" />
-            </div>
-            <div>
-                Idratazione biga: 
-                <input 
-                    type="number" 
-                    name="idratazioneBiga" 
-                    value={input.idratazioneBiga} 
-                    onChange={handleChange} 
-                    min="0"
-                    max="100" />
-            </div>
-            <div>
-                Idratazione autolisi: 
-                <input 
-                    type="number" 
-                    name="idratazioneAutolisi" 
-                    value={input.idratazioneAutolisi} 
-                    onChange={handleChange} 
-                    min="0"
-                    max="100" />
-            </div>
-            <div>
-                Idratazione impasto: 
-                <input 
-                    type="number" 
-                    name="idratazioneImpasto" 
-                    value={input.idratazioneImpasto} 
-                    onChange={handleChange} 
-                    min="0"
-                    max="100" />
-            </div>
-            <div>
-                Idratazione finale: 
-                <input 
-                    type="number" 
-                    name="idratazoneFinale" 
-                    value={input.idratazoneFinale} 
-                    onChange={handleChange} 
-                    min="0"
-                    max="100" />
-            </div>
-            <div>
-                Percentuale sale: 
-                <input 
-                    type="number" 
-                    name="percentualeSale" 
-                    value={input.percentualeSale} 
-                    onChange={handleChange} 
-                    min="0"
-                    max="5" />
-            </div>
-            <div>
-                <p>Peso della biga: { output.pesoDellaBiga } g</p>
-                <p>Acqua nella biga: { output.acquaNellaBiga } g</p>
-                <p>Farina nella biga: { output.farinaNellaBiga } g</p>
-                <p></p>
-                <p>Acqua totale: { output.acquaTotale } g</p>
-                <p></p>
-                <p>Acqua per autolisi: { output.acquaPerAutolisi } g</p>
-                <p>Farina per autolisi: { output.farinaPerAutolisi } g</p>
-                <p></p>
-                <p>Acqua impasto: { output.acquaImpasto } g</p>
-                <p>Acqua finale: { output.acquaFinale } g</p>
-                <p></p>
-                <p>Sale: { output.sale } g</p>
-            </div>
-        </>
+        </div>
+    )
+}
+
+const Element = ({nome, label, value, handle}) => {
+    return (
+        <div className="flex flex-col my-2 w-6/12">
+            <label className="w-full mb-1">{label}</label> 
+            <input 
+                className="w-full p-2 border"
+                type="number" 
+                name={nome} 
+                value={value} 
+                onChange={handle} 
+                min="100" />
+        </div>
     )
 }
 
