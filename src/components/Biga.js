@@ -77,14 +77,16 @@ const Biga = () => {
     }, [output])
 
     return (
-        <div className="p-4 flex flex-wrap">
-            <Element nome="totaleFarina" label="Totale farina" value={input.totaleFarina} handle={handleChange} />
-            <Element nome="percentualeBiga" label="Percentuale biga" value={input.percentualeBiga} handle={handleChange} />
-            <Element nome="idratazioneBiga" label="Idratazione biga" value={input.idratazioneBiga} handle={handleChange} />
-            <Element nome="idratazioneAutolisi" label="Idratazione autolisi" value={input.idratazioneAutolisi} handle={handleChange} />
-            <Element nome="idratazioneImpasto" label="Idratazione impasto" value={input.idratazioneImpasto} handle={handleChange} />
-            <Element nome="idratazoneFinale" label="Idratazione finale" value={input.idratazoneFinale} handle={handleChange} />
-            <Element nome="percentualeSale" label="Percentuale sale" value={input.percentualeSale} handle={handleChange} />
+        <>
+            <div className="p-4 flex flex-wrap">
+                <Element nome="totaleFarina" label="Totale farina" value={input.totaleFarina} handle={handleChange} />
+                <Element nome="percentualeBiga" label="Percentuale biga" value={input.percentualeBiga} handle={handleChange} />
+                <Element nome="idratazioneBiga" label="Idratazione biga" value={input.idratazioneBiga} handle={handleChange} />
+                <Element nome="idratazioneAutolisi" label="Idratazione autolisi" value={input.idratazioneAutolisi} handle={handleChange} />
+                <Element nome="idratazioneImpasto" label="Idratazione impasto" value={input.idratazioneImpasto} handle={handleChange} />
+                <Element nome="idratazoneFinale" label="Idratazione finale" value={input.idratazoneFinale} handle={handleChange} />
+                <Element nome="percentualeSale" label="Percentuale sale" value={input.percentualeSale} handle={handleChange} />
+            </div>
             <div>
                 <p>Peso della biga: <strong>{ output.pesoDellaBiga } g</strong></p>
                 <p>Acqua nella biga: <strong>{ output.acquaNellaBiga } g</strong></p>
@@ -100,7 +102,7 @@ const Biga = () => {
                 <p>&nbsp;</p>
                 <p>Sale: <strong>{ output.sale } g</strong></p>
             </div>
-        </div>
+        </>
     )
 }
 
