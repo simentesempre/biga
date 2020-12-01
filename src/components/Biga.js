@@ -17,6 +17,8 @@ const Biga = () => {
         pesoDellaBiga: null,
         farinaNellaBiga: null,
         acquaNellaBiga: null,
+        lievitoNellaBiga: null,
+        lievitoSeccoNellaBiga: null,
         acquaTotale: null,
         acquaPerAutolisi: null,
         farinaPerAutolisi: null,
@@ -40,11 +42,18 @@ const Biga = () => {
             conAutolisi,
         } = input
 
-        let pesoDellaBiga = Math.round((totaleFarina / 100) * percentualeBiga)
-        let farinaNellaBiga = Math.round(
-            pesoDellaBiga / (idratazioneBiga / 100 + 1)
+        let farinaNellaBiga = Math.round((totaleFarina / 100) * percentualeBiga)
+
+        let acquaNellaBiga = Math.round(
+            (farinaNellaBiga / 100) * idratazioneBiga
         )
-        let acquaNellaBiga = Math.round(pesoDellaBiga - farinaNellaBiga)
+
+        let lievitoNellaBiga = Math.round(farinaNellaBiga / 100)
+
+        let lievitoSeccoNellaBiga = Math.round(lievitoNellaBiga / 3)
+
+        let pesoDellaBiga = Math.round(farinaNellaBiga + acquaNellaBiga)
+
         let acquaTotale = Math.round((totaleFarina / 100) * idratazoneFinale)
         let farinaPerAutolisi = conAutolisi
             ? Math.round(totaleFarina - farinaNellaBiga)
@@ -71,6 +80,8 @@ const Biga = () => {
             pesoDellaBiga,
             acquaNellaBiga,
             farinaNellaBiga,
+            lievitoNellaBiga,
+            lievitoSeccoNellaBiga,
             acquaTotale,
             acquaPerAutolisi,
             farinaPerAutolisi,
@@ -105,9 +116,9 @@ const Biga = () => {
         calcola()
     }, [input, calcola])
 
-    useEffect(()=>{
-        process.env !== 'production' && console.log({output})
-    }, [output]) 
+    useEffect(() => {
+        process.env !== 'production' && console.log({ output })
+    }, [output])
 
     return (
         <>
@@ -137,6 +148,7 @@ const Biga = () => {
                     max={100}
                 />
                 <Element
+                    disabled={!input.conAutolisi}
                     nome="idratazioneAutolisi"
                     label="Idratazione autolisi"
                     value={input.idratazioneAutolisi}
@@ -194,6 +206,13 @@ const Biga = () => {
             </div>
             <div className="p-2">
                 <p>
+                    Farina totale: <strong>{input.totaleFarina} g</strong>
+                </p>
+                <p>
+                    Acqua totale: <strong>{output.acquaTotale} g</strong>
+                </p>
+                <p>&nbsp;</p>
+                <p>
                     Peso della biga: <strong>{output.pesoDellaBiga} g</strong>
                 </p>
                 <p>
@@ -203,9 +222,12 @@ const Biga = () => {
                     Farina nella biga:{' '}
                     <strong>{output.farinaNellaBiga} g</strong>
                 </p>
-                <p>&nbsp;</p>
                 <p>
-                    Acqua totale: <strong>{output.acquaTotale} g</strong>
+                    Lievito nella biga:{' '}
+                    <strong>
+                        {output.lievitoNellaBiga} g (oppure{' '}
+                        {output.lievitoSeccoNellaBiga} g secco)
+                    </strong>
                 </p>
                 <p>&nbsp;</p>
                 <p>
@@ -238,11 +260,21 @@ const Biga = () => {
     )
 }
 
-const Element = ({ nome, label, value, handle, min, max, step = 1 }) => {
+const Element = ({
+    nome,
+    label,
+    value,
+    handle,
+    min,
+    max,
+    step = 1,
+    disabled = false,
+}) => {
     return (
         <div className="flex flex-col my-2 w-6/12 pr-2">
             <label className="w-full mb-1">{label}</label>
             <input
+                disabled={disabled}
                 className="w-full p-2 border"
                 type="number"
                 name={nome}
