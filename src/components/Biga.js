@@ -50,7 +50,7 @@ const Biga = () => {
 
         let lievitoNellaBiga = Math.round(farinaNellaBiga / 100)
 
-        let lievitoSeccoNellaBiga = Math.round(lievitoNellaBiga / 3)
+        let lievitoSeccoNellaBiga = Math.round( ( lievitoNellaBiga / 3 ) * 10 ) / 10
 
         let pesoDellaBiga = Math.round(farinaNellaBiga + acquaNellaBiga)
 
@@ -125,7 +125,7 @@ const Biga = () => {
             <div className="p-2 flex flex-wrap">
                 <Element
                     nome="totaleFarina"
-                    label="Totale farina"
+                    label="Tot. farina"
                     value={input.totaleFarina}
                     handle={handleChange}
                     min={100}
@@ -133,7 +133,7 @@ const Biga = () => {
                 />
                 <Element
                     nome="percentualeBiga"
-                    label="Percentuale biga"
+                    label="Perc. biga"
                     value={input.percentualeBiga}
                     handle={handleChange}
                     min={0}
@@ -141,7 +141,7 @@ const Biga = () => {
                 />
                 <Element
                     nome="idratazioneBiga"
-                    label="Idratazione biga"
+                    label="Idro biga"
                     value={input.idratazioneBiga}
                     handle={handleChange}
                     min={0}
@@ -150,7 +150,7 @@ const Biga = () => {
                 <Element
                     disabled={!input.conAutolisi}
                     nome="idratazioneAutolisi"
-                    label="Idratazione autolisi"
+                    label="Idro autolisi"
                     value={input.idratazioneAutolisi}
                     handle={handleChange}
                     min={0}
@@ -158,7 +158,7 @@ const Biga = () => {
                 />
                 <Element
                     nome="idratazioneImpasto"
-                    label="Idratazione impasto"
+                    label="Idro impasto"
                     value={input.idratazioneImpasto}
                     handle={handleChange}
                     min={0}
@@ -166,7 +166,7 @@ const Biga = () => {
                 />
                 <Element
                     nome="idratazoneFinale"
-                    label="Idratazione finale"
+                    label="Idro finale"
                     value={input.idratazoneFinale}
                     handle={handleChange}
                     min={0}
@@ -174,7 +174,7 @@ const Biga = () => {
                 />
                 <Element
                     nome="percentualeSale"
-                    label="Percentuale sale"
+                    label="Perc. sale"
                     value={input.percentualeSale}
                     handle={handleChange}
                     min={0}
@@ -183,16 +183,16 @@ const Biga = () => {
                 />
                 <Element
                     nome="percentualeOlio"
-                    label="Percentuale olio"
+                    label="Perc. olio"
                     value={input.percentualeOlio}
                     handle={handleChange}
                     min={0}
                     max={10}
                     step="0.1"
                 />
-                <div className="flex my-2 w-6/12">
+                <div className="flex my-2 w-1/3">
                     <label className="w-full">
-                        Con autolisi
+                        
                         <input
                             className="ml-2"
                             type="checkbox"
@@ -200,16 +200,13 @@ const Biga = () => {
                             checked={input.conAutolisi}
                             onChange={handleChange}
                             min="100"
-                        />
+                        /> Con autolisi
                     </label>
                 </div>
             </div>
             <div className="p-2">
                 <p>
-                    Farina totale: <strong>{input.totaleFarina} g</strong>
-                </p>
-                <p>
-                    Acqua totale: <strong>{output.acquaTotale} g</strong>
+                    Farina totale: <strong>{input.totaleFarina} g</strong> | Acqua totale: <strong>{output.acquaTotale} g</strong>
                 </p>
                 <p>&nbsp;</p>
                 <p>
@@ -250,9 +247,7 @@ const Biga = () => {
                 </p>
                 <p>&nbsp;</p>
                 <p>
-                    Sale: <strong>{output.sale} g</strong>
-                </p>
-                <p>
+                    Sale: <strong>{output.sale} g</strong> | 
                     Olio: <strong>{output.olio} g</strong>
                 </p>
             </div>
@@ -271,7 +266,7 @@ const Element = ({
     disabled = false,
 }) => {
     return (
-        <div className="flex flex-col my-2 w-6/12 pr-2">
+        <div className="flex flex-col justify-end my-2 w-1/3 pr-2">
             <label className="w-full mb-1">{label}</label>
             <input
                 disabled={disabled}
