@@ -116,10 +116,6 @@ const Biga = () => {
         calcola()
     }, [input, calcola])
 
-    useEffect(() => {
-        process.env !== 'production' && console.log({ output })
-    }, [output])
-
     return (
         <>
             <div className="p-2 flex flex-wrap">
