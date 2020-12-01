@@ -50,7 +50,7 @@ const Biga = () => {
 
         let lievitoNellaBiga = Math.round(farinaNellaBiga / 100)
 
-        let lievitoSeccoNellaBiga = Math.round( ( lievitoNellaBiga / 3 ) * 10 ) / 10
+        let lievitoSeccoNellaBiga = Math.round((lievitoNellaBiga / 3) * 10) / 10
 
         let pesoDellaBiga = Math.round(farinaNellaBiga + acquaNellaBiga)
 
@@ -192,7 +192,6 @@ const Biga = () => {
                 />
                 <div className="flex my-2 w-1/3">
                     <label className="w-full">
-                        
                         <input
                             className="ml-2"
                             type="checkbox"
@@ -200,13 +199,15 @@ const Biga = () => {
                             checked={input.conAutolisi}
                             onChange={handleChange}
                             min="100"
-                        /> Con autolisi
+                        />{' '}
+                        Con autolisi
                     </label>
                 </div>
             </div>
             <div className="p-2">
                 <p>
-                    Farina totale: <strong>{input.totaleFarina} g</strong> | Acqua totale: <strong>{output.acquaTotale} g</strong>
+                    Farina totale: <strong>{input.totaleFarina} g</strong> |
+                    Acqua totale: <strong>{output.acquaTotale} g</strong>
                 </p>
                 <p>&nbsp;</p>
                 <p>
@@ -247,8 +248,8 @@ const Biga = () => {
                 </p>
                 <p>&nbsp;</p>
                 <p>
-                    Sale: <strong>{output.sale} g</strong> | 
-                    Olio: <strong>{output.olio} g</strong>
+                    Sale: <strong>{output.sale} g</strong> | Olio:{' '}
+                    <strong>{output.olio} g</strong>
                 </p>
             </div>
         </>
