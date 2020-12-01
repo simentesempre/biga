@@ -13,10 +13,11 @@
   },
   "scripts": {
     "start": "npm run watch:css && react-scripts start",
-    "build": "npm run watch:css && react-scripts build",
+    "build": "npm format && npm run watch:css && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css"
+    "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
+    "format": "prettier -w \"src/**/*.js\""
   },
   "eslintConfig": {
     "extends": [
@@ -40,6 +41,7 @@
     "autoprefixer": "^9.8.6",
     "postcss": "^8.1.10",
     "postcss-cli": "^8.3.0",
+    "prettier": "^2.2.1",
     "tailwindcss": "^2.0.1"
   }
 }
