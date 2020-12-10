@@ -10,6 +10,7 @@ const Biga = () => {
         idratazoneFinale: 70,
         percentualeSale: 2.0,
         percentualeOlio: 0.0,
+        percentualeMalto: 1.0,
         conAutolisi: true,
     })
 
@@ -27,6 +28,7 @@ const Biga = () => {
         acquaFinale: null,
         sale: null,
         olio: null,
+        malto: null,
     })
 
     const calcola = useCallback(() => {
@@ -39,6 +41,7 @@ const Biga = () => {
             idratazoneFinale,
             percentualeSale,
             percentualeOlio,
+            percentualeMalto,
             conAutolisi,
         } = input
 
@@ -75,6 +78,7 @@ const Biga = () => {
         )
         let sale = Math.round((totaleFarina / 100) * percentualeSale)
         let olio = Math.round((totaleFarina / 100) * percentualeOlio)
+        let malto = Math.round((totaleFarina / 100) * percentualeMalto)
 
         setOutput({
             pesoDellaBiga,
@@ -91,6 +95,7 @@ const Biga = () => {
             percentualeOlio,
             sale,
             olio,
+            malto,
         })
     }, [input])
 
@@ -244,8 +249,9 @@ const Biga = () => {
                 </p>
                 <p>&nbsp;</p>
                 <p>
-                    Sale: <strong>{output.sale} g</strong> | Olio:{' '}
-                    <strong>{output.olio} g</strong>
+                    Sale: <strong>{output.sale} g</strong> | Olio:
+                    <strong>{output.olio} g</strong> | Malto:{' '}
+                    <strong>{output.malto} g</strong>
                 </p>
             </div>
         </>
