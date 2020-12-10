@@ -191,6 +191,15 @@ const Biga = () => {
                     max={10}
                     step="0.1"
                 />
+                <Element
+                    nome="percentualeMalto"
+                    label="Perc. malto"
+                    value={input.percentualeMalto}
+                    handle={handleChange}
+                    min={0}
+                    max={5}
+                    step="0.1"
+                />
                 <div className="flex my-2 w-1/3">
                     <label className="w-full">
                         <input
@@ -249,7 +258,7 @@ const Biga = () => {
                 </p>
                 <p>&nbsp;</p>
                 <p>
-                    Sale: <strong>{output.sale} g</strong> | Olio:
+                    Sale: <strong>{output.sale} g</strong> | Olio:{' '}
                     <strong>{output.olio} g</strong> | Malto:{' '}
                     <strong>{output.malto} g</strong>
                 </p>
